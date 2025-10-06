@@ -1,20 +1,10 @@
 const inputEl = document.getElementById("human-choice");
+
 let computerScore = 0;
 let humanScore = 0;
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-console.log(humanScore);
-console.log(computerScore);
+let round = 0;
 
 function playRound(humanChoice, computerChoice) {
-  //If paper - rock = paper wins (h)
-  //if scissors - paper = scissors wins (h)
-  //If rock - scissors = rock wins (h)
-
-  console.log(humanChoice);
-  console.log(computerChoice);
-
   if (humanChoice === computerChoice) {
     console.log("even");
   } else if (humanChoice === "paper" && computerChoice === "rock") {
@@ -27,7 +17,7 @@ function playRound(humanChoice, computerChoice) {
     humanScore++;
     console.log("human wins");
   } else {
-    computerScore;
+    computerScore++;
     console.log("computer wins");
   }
 }
@@ -56,10 +46,36 @@ function getHumanChoice() {
   return humanChoice.toLowerCase();
 }
 
+function displayScore() {
+  const humanScorePara = document.getElementById("human-score");
+  const computerScorePara = document.getElementById("computer-score");
+
+  humanScorePara.textContent = `Human score: ${humanScore}`;
+  computerScorePara.textContent = `Computer score: ${computerScore}`;
+}
+
+function displayRound() {
+  const roundEl = document.getElementById("rounds");
+  roundEl.textContent = `Round: ${round}`;
+}
+
+function displayGameFinished() {
+  const gameFinishedEl = document.getElementById("game-finished");
+  gameFinishedEl.textContent = "GAME FINISHED";
+}
+
 document.getElementById("btn").addEventListener("click", () => {
-  //Redo, that all the logic works on btn click
+  const humanSelection = getHumanChoice();
+  const computerSelection = getComputerChoice();
+
+  playRound(humanSelection, computerSelection);
+  round++;
+
+  if (round <= 4) {
+    displayRound();
+    displayScore();
+  } else {
+    displayRound();
+    displayGameFinished();
+  }
 });
-
-playRound(humanSelection, computerSelection);
-
-// test
