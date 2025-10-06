@@ -61,3 +61,5 @@ document.getElementById("btn").addEventListener("click", () => {
 });
 
 playRound(humanSelection, computerSelection);
+
+// test
